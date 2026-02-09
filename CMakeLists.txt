@@ -16,10 +16,13 @@ find_package(turtlesim_custom_msgs REQUIRED)
 # find_package(<dependency> REQUIRED)
 
 add_executable(distance src/Distance.cpp)
+add_executable(change_threshold src/ChangeThreshold.cpp)
 ament_target_dependencies(distance rclcpp turtlesim_custom_msgs std_msgs sensor_msgs)
+ament_target_dependencies(change_threshold rclcpp turtlesim_custom_msgs std_msgs sensor_msgs)
 
 install(TARGETS
   distance
+  change_threshold
   DESTINATION lib/${PROJECT_NAME}
 )
 
@@ -27,6 +30,11 @@ install(PROGRAMS
   scripts/Mobile_controller.py
   DESTINATION lib/${PROJECT_NAME}
   RENAME mobileController
+)
+
+install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}/
 )
 
 if(BUILD_TESTING)

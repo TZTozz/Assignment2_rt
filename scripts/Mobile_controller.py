@@ -18,8 +18,9 @@ class MobileController(Node):
         
         #Time
         self.start_time = self.get_clock().now()
-        self.lastTime = self.start_time - Duration(seconds = 2.0) 
-        self.duration = 1.0  #(s)
+        self.lastTime = self.start_time - Duration(seconds = 6.0) 
+        self.duration = 5.0  #(s)
+        self.durationStop = 1.0 #(s)
 
         self.message = Twist()
         self.needStop = False
@@ -80,14 +81,14 @@ class MobileController(Node):
                 self.tempAngular = self.message.angular.z
                 self.firstStop = False
 
-            if elapsed_time_stop < self.duration:        #Wait for a second
+            if elapsed_time_stop < self.durationStop:        #Wait for a second
                 self.message.linear.x = 0.0
                 self.message.angular.z = 0.0
-                self.get_logger().info(f'Stopped turtle_{self.numTarta}')
-            else:                                   #Moves the turtle in the opposit direction
+                self.get_logger().info('Stopped Robot')
+            else:                                   #Moves the robot in the opposit direction
                 self.message.linear.x = -self.tempLinear
                 self.message.angular.z = -self.tempAngular
-                self.get_logger().info(f'Moving turtle_{self.numTarta} in the opposite direction')
+                self.get_logger().info('Moving robot in the opposite direction')
 
 
             self.publisher1_.publish(self.message)
