@@ -20,7 +20,7 @@ class MobileController(Node):
         #Time
         self.start_time = self.get_clock().now()
         self.lastTime = self.start_time - Duration(seconds = 6.0) 
-        self.duration = 5.0  #(s)
+        self.duration = 3.0  #(s)
         self.durationStop = 1.0 #(s)
 
         self.message = Twist()
