@@ -2,19 +2,19 @@
 import sys
 import rclpy
 from rclpy.node import Node
-from turtlesim_custom_msgs.srv import AvarageVelocity_srv 
+from turtlesim_custom_msgs.srv import VelocityComponents
 
 class AskAverageVelocity(Node):
 
     def __init__(self):
         super().__init__('average_velocity_client')
 
-        self.cli = self.create_client(AvarageVelocity_srv, 'average_velocity')
+        self.cli = self.create_client(VelocityComponents, 'average_velocity')
         
         while not self.cli.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('Waiting for the service')
         
-        self.req = AvarageVelocity_srv.Request()
+        self.req = VelocityComponents.Request()
 
     def send_request(self):
         self.future = self.cli.call_async(self.req)
@@ -33,13 +33,9 @@ def main(args=None):
             if user_input.lower() == 'q':
                 break
             
-            print("Sended request...")
             response = client.send_request()
             
-            # Qui assumiamo che la risposta abbia i campi linear e angular
-            # Adatta questi campi in base alla definizione del tuo .srv
             print(f"Avarage velocity:\nLinear: {response.linear:.2f}, Angular: {response.angular:.2f}")
-            print("-" * 30)
 
     except KeyboardInterrupt:
         pass

@@ -44,7 +44,7 @@ class MobileController(Node):
                 #Stops the robot
                 self.message.linear.x = 0.0
                 self.message.angular.z = 0.0
-                self.publisher1_.publish(self.message)
+                self.publisherVelocity_.publish(self.message)
 
                 #Ask the velocity
                 while True:
