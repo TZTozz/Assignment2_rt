@@ -53,4 +53,20 @@ def generate_launch_description():
             arguments=['--ros-args', '--log-level', 'info']
         ),
 
+        Node(
+            package='assignment2_rt',
+            executable='averageVelocity',
+            name='average_velocity',
+            arguments=['--ros-args', '--log-level', 'info']
+        ),
+
+        Node(
+            package='assignment2_rt',
+            executable='askAverage',
+            name='ask_average',
+            prefix='gnome-terminal --', 
+            output='screen',
+            arguments=['--ros-args', '--log-level', 'info']
+        ),
+
     ])

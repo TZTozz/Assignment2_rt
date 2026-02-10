@@ -32,6 +32,18 @@ install(PROGRAMS
   RENAME mobileController
 )
 
+install(PROGRAMS
+  scripts/AvarageVelocity.py
+  DESTINATION lib/${PROJECT_NAME}
+  RENAME averageVelocity
+)
+
+install(PROGRAMS
+  scripts/AskAverage.py
+  DESTINATION lib/${PROJECT_NAME}
+  RENAME askAverage
+)
+
 install(DIRECTORY
   launch
   DESTINATION share/${PROJECT_NAME}/

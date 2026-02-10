@@ -9,7 +9,8 @@ class MobileController(Node):
 
     def __init__(self):
         super().__init__('UI')
-        self.publisher1_ = self.create_publisher(Twist, '/cmd_vel', 10)
+        self.publisherVelocity_ = self.create_publisher(Twist, '/cmd_vel', 10)
+        self.publisherInput_ = self.create_publisher(Twist, '/user_input', 10)
 
         self.subscription = self.create_subscription(Bool, 'stop', self.listener_callback, 10)
         
@@ -63,13 +64,14 @@ class MobileController(Node):
                 self.message.angular.z = self.angular
                 self.get_logger().info(f'The velocity of robot is {self.message.linear}')
                 
-                #Send it to the right turtle
-                self.publisher1_.publish(self.message)
+                #Send it to the robot
+                self.publisherVelocity_.publish(self.message)
+                self.publisherInput_.publish(self.message)
                 self.lastTime = self.get_clock().now()
 
             else:       #Less than a second
                 self.get_logger().info(f'Still sending to the robot the linear velocity of {self.vel} and angular velocity of {self.angular}')
-                self.publisher1_.publish(self.message)
+                self.publisherVelocity_.publish(self.message)
 
 
             self.firstStop = True
@@ -91,7 +93,7 @@ class MobileController(Node):
                 self.get_logger().info('Moving robot in the opposite direction')
 
 
-            self.publisher1_.publish(self.message)
+            self.publisherVelocity_.publish(self.message)
             
 
         
